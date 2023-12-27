@@ -51,7 +51,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Load your pre-trained Keras model
-model = load_model("model_55.keras")
+model = load_model("model_55")
 
 # Assuming your model expects images of a certain size
 img_size = (224, 224)
