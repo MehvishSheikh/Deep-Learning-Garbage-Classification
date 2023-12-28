@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import ImageUploadForm from './ImageUploadForm';
-
-
+import { Bar } from 'react-chartjs-2';
 const ComponentWeb = () => {
-
-
-
-
-  // const ImageUploadForm = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [result, setResult] = useState(null);
+  const [maxProbability, setMaxProbability] = useState(null);
   const [error, setError] = useState(null);
+  const [individualProbabilities, setIndividualProbabilities] = useState({});
 
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
@@ -34,12 +30,54 @@ const ComponentWeb = () => {
 
       const resultData = await response.json();
       setResult(resultData.result);
-      setError(null);
+      setMaxProbability(resultData.max_probability.toFixed(4));
+      setIndividualProbabilities(resultData.individual_probabilities);
+      
+
+      if (resultData.max_probability < 0.65) {
+        setError('Please provide a clear image.');
+        setIndividualProbabilities(Object.entries(resultData.individual_probabilities));
+      } else {
+        setError(null);
+        // setClassProbabilities(Object.entries(resultData.individual_probabilities));
+        setIndividualProbabilities(Object.entries(resultData.individual_probabilities));
+      }
     } catch (error) {
       setError(error.message);
       setResult(null);
+      setMaxProbability(null);
+      setIndividualProbabilities({});
     }
   };
+
+  // const data = {
+  //   labels: Object.keys(individualProbabilities),
+  //   datasets: [
+  //     {
+  //       label: 'Probability',
+  //       data: Object.values(individualProbabilities),
+  //       backgroundColor: 'rgba(75,192,192,0.2)',
+  //       borderColor: 'rgba(75,192,192,1)',
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // };
+  
+  // const options = {
+  //   scales: {
+  //     x: {
+  //       type: 'category',
+  //       labels: Object.keys(individualProbabilities),
+  //     },
+  //     y: {
+  //       beginAtZero: true,
+  //     },
+  //   },
+  // };
+  
+  
+  
+
 
   return (
     <div>
@@ -88,22 +126,7 @@ const ComponentWeb = () => {
                 <div className="d-flex justify-content-center justify-content-lg-start">
                   <div className="page">
                     <p></p>
-                    {/* <form
-                method="POST"
-                id="form"
-                action=""
-                encType="multipart/form-data"
-              >
-                <label htmlFor="photo" className="custom-button">
-                  Upload Photo
-                  <input
-                    type="file"
-                    accept="image/png, image/jpeg, image/gif"
-                    name="photo"
-                    id="photo"
-                  />
-                </label>
-              </form> */}
+                    
                     <div>
                       <form onSubmit={handleSubmit}>
                         <label htmlFor="photo" className="custom-button">
@@ -121,49 +144,27 @@ const ComponentWeb = () => {
                         {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
                         <button type="submit" className='classify-button'>Classify Waste</button>
 
-                        {/* handleImageChange={handleImageChange}
-            handleSubmit={handleSubmit} */}
-
+                       
                       </form>
 
 
-                      {/* <ImageUploadForm
-        handleImageChange={handleImageChange}
-        handleSubmit={handleSubmit}
-      /> */}
+            
+<div className='result-box'>
+{result && maxProbability && (
+        <div>
+          <p>Result: {result}</p>
+          <p>Probability: {maxProbability*100}%</p>
+        </div>
+      )}
 
 
+      {error && <p>Error: {error}</p>}
+    </div>
+    </div>
 
-                      {result && (
-                        <div className='result-box'>
-                          <h2>Result : {result}</h2>
+    
 
-                        </div>
-                      )}
-
-                      {error && (
-                        <div className='error-box'>
-                          <h2>Error:</h2>
-                          <p>{error}</p>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* <form  method = "POST" id="form"  action=""
-               enctype = "multipart/form-data">
-               
-              <label>
-                  <input type="file" accept="image/png, image/jpeg, image/gif" name="photo"/>
-              </label>
-               */}
-                    {/* <input type="submit" value="Submit"> */}
-                    {/* {% if error: %}
-              <p class=error><strong>Error:</strong> {{ error }} </p>
-              {% endif %} */}
-                    {/* </form> */}
-                    {/* {% if answer is not none: %}
-          <p><label name='answer'>Classified: {{ answer }}</label><br /></p>
-          {% endif %} */}
+              
                   </div>
                   {/* <a href="https://youtu.be/mQ93IcGCag4" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> */}
                 </div>
@@ -208,66 +209,46 @@ const ComponentWeb = () => {
                   data-aos="fade-left"
                   data-aos-delay={100}
                 >
-                  <h3>Clasfication and Percentage of waste</h3>
-                  <div className="skills-content">
-                    <div className="progress">
-                      <span className="skill">
-                        Dry <i className="val">35%</i>
-                      </span>
-                      <div className="progress-bar-wrap">
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          aria-valuenow={100}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                    <div className="progress">
-                      <span className="skill">
-                        Organic <i className="val">25%</i>
-                      </span>
-                      <div className="progress-bar-wrap">
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          aria-valuenow={90}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                    <div className="progress">
-                      <span className="skill">
-                        {" "}
-                        E-waste<i className="val">25%</i>
-                      </span>
-                      <div className="progress-bar-wrap">
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          aria-valuenow={75}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                    <div className="progress">
-                      <span className="skill">
-                        Biomedical<i className="val">15%</i>
-                      </span>
-                      <div className="progress-bar-wrap">
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          aria-valuenow={55}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                  </div>
+
+
+
+
+<h3>Clasfication and Percentage of waste</h3>
+{/* {individualProbabilities.length > 0 && (
+        <div>
+         
+          {individualProbabilities.map(([className, probability]) => (
+            <p key={className}>{`${className}: ${probability.toFixed(2)}%`}</p>
+          ))}
+        </div>
+      )} */}
+
+<div className="skills-content">
+  {Array.isArray(individualProbabilities) && individualProbabilities.map(([className, probability]) => (
+    <div className="progress" key={className}>
+      <span className="skill">
+        {className} <i className="val">{probability.toFixed(2)}%</i>
+      </span>
+      <div className="progress-bar-wrap">
+        <div
+          className="progress-bar"
+          role="progressbar"
+          style={{ width: `${probability}%` }}
+          aria-valuenow={probability}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+
+
+
+                
                 </div>
               </div>
             </div>
@@ -370,23 +351,7 @@ const ComponentWeb = () => {
               </div>
             </div>
           </section>
-          {/* ======= Cta Section ======= */}
-          {/* <section id="cta" class="cta">
-<div class="container" data-aos="zoom-in">
-
-  <div class="row">
-    <div class="col-lg-9 text-center text-lg-start">
-      <h3>Call To Action</h3>
-      <p> Here is the phone number of municipality.</p>
-    </div>
-    <div class="col-lg-3 cta-btn-container text-center">
-      <a class="cta-btn align-middle" href="tel:+97716609952111">Call To Action</a>
-    </div>
-  </div>
-
-</div>
-    </section>End Cta Section */}
-          {/* ======= Frequently Asked Questions Section ======= */}
+          
           <section id="faq" className="faq section-bg">
             <div className="container" data-aos="fade-up">
               <div className="section-title">
