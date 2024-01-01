@@ -91,7 +91,7 @@ def classify_waste():
             'max_probability': float(max_probability),
             'individual_probabilities': probabilities,
             'classes': classes,
-            'probabilities': prob
+            # 'probabilities': prob,
 
         })
     except Exception as e:
