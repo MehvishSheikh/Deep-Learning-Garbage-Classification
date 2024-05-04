@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Garbage Classification AI Model
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains an AI garbage classification model built using a Deep Learning Convolutional Neural Network (CNN). The model takes an image of garbage, scans it, and predicts the type of waste among four categories: recyclable, e-waste, organic waste, and biomedical waste.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+Proper waste management is crucial for environmental sustainability. This AI model aims to assist in waste management by automatically classifying garbage into different categories, making recycling and disposal processes more efficient.
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- *Python:* Programming language used for model development and backend implementation.
+- *TensorFlow/Keras:* Deep learning framework used for building and training the CNN model.
+- *OpenCV:* Library for image processing and manipulation, utilized for preprocessing garbage images.
+- *Flask:* Micro web framework used for creating the user interface and serving predictions.
+- *HTML/CSS/JavaScript:* Frontend technologies used for designing and interacting with the user interface.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
+1. *Clone the repository:*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://github.com/your-username/garbage-classification.git
+   pip install -r requirements.txt
+   python app.py
+   node server
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![wasteclassify](https://github.com/MehvishSheikh/WasteClassification_Machine-Learning/assets/130210811/c8a4f283-64b0-40ec-9564-85262073cbcb)
+<img width="947" alt="wasteclassify2" src="https://github.com/MehvishSheikh/WasteClassification_Machine-Learning/assets/130210811/ab239ca1-1bb2-4ccc-9f1d-e159e394b1d2">
+![wasteresult3](https://github.com/MehvishSheikh/WasteClassification_Machine-Learning/assets/130210811/cd434216-75a9-482d-a7d8-e1495f73c714)
