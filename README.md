@@ -1,4 +1,4 @@
-# Garbage Classification AI Model
+# Garbage Classification Deep Learning Model
 
 This repository contains an AI garbage classification model built using a Deep Learning Convolutional Neural Network (CNN). The model takes an image of garbage, scans it, and predicts the type of waste among four categories: recyclable, e-waste, organic waste, and biomedical waste.
 
